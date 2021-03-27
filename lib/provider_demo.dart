@@ -4,9 +4,16 @@ import 'package:provider/provider.dart';
 
 class Data with ChangeNotifier {
   int count = 0;
+  String name = "kangkang";
 
   void add() {
     count++;
+    notifyListeners();
+  }
+
+  void editName(String name) {
+    this.name = name;
+    notifyListeners();
   }
 }
 
@@ -22,7 +29,11 @@ class _ProviderDemoState extends State<ProviderDemo> {
       create: (BuildContext context) => Data(),
       builder: (context, child) => Scaffold(
         body: Column(
-          children: [],
+          children: [
+            Consumer(
+              builder: (BuildContext context, Data value, Widget child) {},
+            ),
+          ],
         ),
       ),
     );
