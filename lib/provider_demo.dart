@@ -7,6 +7,7 @@ class Data with ChangeNotifier {
   String name = "kangkang";
 
   void add() {
+    print("接受并发布");
     count++;
     notifyListeners();
   }
@@ -25,17 +26,80 @@ class ProviderDemo extends StatefulWidget {
 class _ProviderDemoState extends State<ProviderDemo> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (BuildContext context) => Data(),
-      builder: (context, child) => Scaffold(
-        body: Column(
-          children: [
-            Consumer(
-              builder: (BuildContext context, Data value, Widget child) {},
+    print("================ProviderDemo build=================");
+    return Scaffold(
+      body: Column(
+        children: [
+          StlA(),
+          GestureDetector(
+            onTap: () {
+              print("点击");
+              context.read<Data>().add();
+              // context.read<Data>().editName("name");
+            },
+            child: Container(
+              width: double.maxFinite,
+              height: 100,
+              color: Colors.orange,
+              alignment: Alignment.center,
+              child: Text("点击"),
             ),
-          ],
-        ),
+          )
+        ],
       ),
+    );
+  }
+}
+
+class StlA extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    print("StlA build");
+    return Column(
+      children: [
+        // Consumer(
+        //   builder: (BuildContext context, Data value, Widget child) {
+        //     print("================Consumer build=================");
+        //     return Container(
+        //       width: double.maxFinite,
+        //       height: 100,
+        //       color: Colors.red,
+        //       alignment: Alignment.center,
+        //       child: Text("Consumer ${value.count}"),
+        //     );
+        //   },
+        // ),
+        // Selector(
+        //     builder: (
+        //       context,
+        //       String name,
+        //       Widget child,
+        //     ) {
+        //       print("================Selector build=================");
+        //       return Container(
+        //         width: double.maxFinite,
+        //         height: 100,
+        //         color: Colors.yellow,
+        //         alignment: Alignment.center,
+        //         child: Text("Selector $name"),
+        //       );
+        //     },
+        //     selector: (context, Data data) => data.name),
+        Container(
+          width: double.maxFinite,
+          height: 100,
+          color: Colors.blue,
+          alignment: Alignment.center,
+          child: Text("没关系的"),
+        ),
+        Container(
+          width: double.maxFinite,
+          height: 100,
+          color: Colors.blue,
+          alignment: Alignment.center,
+          child: Text("${Provider.of<Data>(context).count}"),
+        ),
+      ],
     );
   }
 }
