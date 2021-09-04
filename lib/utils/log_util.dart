@@ -1,5 +1,5 @@
 class LogUtil{
   static void m(String message){
-    print("zoro print=========> 【   $message  】 ");
+    print("zoro print=========>    $message   ");
   }
 }
