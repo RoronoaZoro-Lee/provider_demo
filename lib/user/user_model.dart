@@ -18,8 +18,20 @@ class UserModel {
     this.age = age;
   }
 
-  @override
-  String toString() {
-    return "userName: $userName, phone: $phone, avatar: $avatar, age: $age,";
+  UserModel.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    userName = json['userName'];
+    phone = json['phone'];
+    avatar = json['avatar'];
+    age = json['age'];
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "userName": this.userName,
+      "phone": this.phone,
+      "avatar": this.avatar,
+      "age": this.age,
+    };
   }
 }
