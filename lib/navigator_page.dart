@@ -4,6 +4,8 @@ import 'package:provider_demo/bottom_index/bottom_index_provider.dart';
 import 'package:provider_demo/home_page.dart';
 import 'package:provider_demo/my_page.dart';
 import 'package:provider_demo/user/user_provider.dart';
+import 'package:provider_demo/utils/cache_util.dart';
+import 'package:provider_demo/utils/log_util.dart';
 
 // const _homeIndex = 0;
 const _myIndex = 1;
@@ -20,7 +22,15 @@ class _NavigatorPageState extends State<NavigatorPage> {
   final PageController _controller = PageController(initialPage: 0);
 
   @override
+  void initState() {
+    CacheUtil().init();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    LogUtil.m("navigator page build");
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -61,10 +71,26 @@ class _NavigatorPageState extends State<NavigatorPage> {
 
   void _clickBottomItem(int index) async {
     if (index == _myIndex && !context.read<UserProvider>().isLogin) {
-      await Future.delayed(Duration(seconds: 1));
-      context.read<UserProvider>().login();
+      showDialog(
+          context: context,
+          builder: (_) {
+            return Center(
+              child: Container(
+                color: Colors.white,
+                child: TextButton(
+                    onPressed: () {
+                      context.read<UserProvider>().login();
+                      Navigator.pop(context);
+                      _controller.jumpToPage(index);
+                      context.read<BottomIndexProvider>().setIndex(index);
+                    },
+                    child: Text("登录")),
+              ),
+            );
+          });
+    } else {
+      _controller.jumpToPage(index);
+      context.read<BottomIndexProvider>().setIndex(index);
     }
-    _controller.jumpToPage(index);
-    context.read<BottomIndexProvider>().setIndex(index);
   }
 }

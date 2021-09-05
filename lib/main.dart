@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_demo/bottom_index/bottom_index_provider.dart';
+import 'package:provider_demo/fans/fans_provider.dart';
 import 'package:provider_demo/navigator_page.dart';
 import 'package:provider_demo/reward/reward_provider.dart';
 import 'package:provider_demo/user/user_provider.dart';
 
 void main() {
+  Provider.debugCheckInvalidValueType = null;
   runApp(
-    ChangeNotifierProvider(
-      create: (BuildContext context) => UserProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (BuildContext context) => FansProvider(),
+        ),
+        ProxyProvider<FansProvider, UserProvider>(
+            update: (_, fansProvider, __) {
+          return UserProvider(fansNumber: fansProvider.fansNumber);
+        }),
+      ],
       child: MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  RewardProvider _rewardProvider = RewardProvider();
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,7 +35,7 @@ class MyApp extends StatelessWidget {
       ),
       home: MultiProvider(
         providers: [
-          ChangeNotifierProvider.value(value: _rewardProvider),
+          ChangeNotifierProvider(create: (_) => RewardProvider()),
           ChangeNotifierProvider(create: (_) => BottomIndexProvider()),
         ],
         child: NavigatorPage(title: 'Provider Demo'),

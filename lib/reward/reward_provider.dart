@@ -7,8 +7,16 @@ class RewardProvider extends ChangeNotifier {
 
   RewardModel get state => _state;
 
-  void initReward() {
-    _state = RewardModel.create(100, 2034, 2234);
+  void setReward(
+    num watchAdReward,
+    num creationReward,
+    num fansReward,
+  ) {
+    _state = RewardModel.create(watchAdReward, creationReward, fansReward);
+    notifyListeners();
+  }
+
+  void justNotify() {
     notifyListeners();
   }
 }
