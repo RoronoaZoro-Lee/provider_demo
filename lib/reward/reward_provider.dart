@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'reward_state.dart';
+import 'reward_model.dart';
 
 class RewardProvider extends ChangeNotifier {
-  RewardState _state;
+  RewardModel _state;
 
-  RewardState get state => _state;
+  RewardModel get state => _state;
 
   void initReward() {
-    _state = RewardState.create(100, 2034, 2234);
+    _state = RewardModel.create(100, 2034, 2234);
     notifyListeners();
   }
 }

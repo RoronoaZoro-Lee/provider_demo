@@ -1,13 +1,13 @@
-class RewardState {
+class RewardModel {
   num watchAdReward;
   num creationReward;
   num fansReward;
 
-  RewardState() {
+  RewardModel() {
     // init some variables
   }
 
-  RewardState.create(
+  RewardModel.create(
     num watchAdReward,
     num creationReward,
     num fansReward,
