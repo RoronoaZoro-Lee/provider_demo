@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:provider_demo/bottom_index/bottom_index_provider.dart';
-import 'package:provider_demo/home_page.dart';
-import 'package:provider_demo/my_page.dart';
-import 'package:provider_demo/user/user_provider.dart';
+import 'package:provider_demo/business/navigator/data/bottom_index/bottom_index_provider.dart';
+import 'package:provider_demo/business/home/home_page.dart';
+import 'package:provider_demo/business/my/my_page.dart';
+import 'package:provider_demo/common_data/user/user_provider.dart';
 import 'package:provider_demo/utils/cache_util.dart';
 import 'package:provider_demo/utils/log_util.dart';
 

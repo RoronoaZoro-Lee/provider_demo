@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:provider_demo/reward/reward_provider.dart';
-import 'package:provider_demo/user/user_provider.dart';
+import 'package:provider_demo/business/my/data/reward/reward_provider.dart';
+import 'package:provider_demo/common_data/user/user_provider.dart';
 import 'package:provider_demo/utils/log_util.dart';
 
 class MyPage extends StatefulWidget {

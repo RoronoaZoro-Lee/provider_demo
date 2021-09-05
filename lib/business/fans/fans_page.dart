@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:provider_demo/fans/fans_provider.dart';
-import 'package:provider_demo/user/user_model.dart';
-import 'package:provider_demo/user/user_provider.dart';
+import 'package:provider_demo/common_data/user/user_model.dart';
+import 'package:provider_demo/common_data/user/user_provider.dart';
+import 'package:provider_demo/common_data/fans/fans_provider.dart';
 import 'package:provider_demo/utils/log_util.dart';
 
 class FansPage extends StatefulWidget {
