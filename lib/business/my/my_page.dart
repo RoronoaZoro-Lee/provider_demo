@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_demo/business/my/data/reward/reward_provider.dart';
+import 'package:provider_demo/business/rewards/fans_reward_page.dart';
+import 'package:provider_demo/business/rewards/watch_ad_reward_page.dart';
 import 'package:provider_demo/common_data/user/user_provider.dart';
 import 'package:provider_demo/utils/log_util.dart';
 
@@ -113,6 +115,7 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
                   // provider.state?.watchAdReward?.toString(),
                   context.select((RewardProvider value) =>
                       value.state?.watchAdReward?.toString()),
+                  action: _openWatchAdRewardPage,
                 );
               },
             ),
@@ -135,6 +138,7 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
 
                   // context.select((RewardProvider value) =>
                   // value.state?.fansReward?.toString()),
+                  action: _openFansRewardPage,
                 );
               },
             ),
@@ -144,24 +148,28 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
     );
   }
 
-  Widget _buildRewardItem(String title, String content) {
+  Widget _buildRewardItem(String title, String content, {Function action}) {
     return Expanded(
+      child: GestureDetector(
+        onTap: () => action?.call(),
         child: Column(
-      children: [
-        Text(
-          title ?? '',
-          style: TextStyle(fontSize: 18, color: Colors.grey),
+          children: [
+            Text(
+              title ?? '',
+              style: TextStyle(fontSize: 18, color: Colors.grey),
+            ),
+            Text(
+              content ?? '',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
-        Text(
-          content ?? '',
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ],
-    ));
+      ),
+    );
   }
 
   @override
@@ -175,5 +183,17 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
     // Navigator.push(context, MaterialPageRoute(builder: (context) {
     //   return FansPage();
     // }));
+  }
+
+  void _openWatchAdRewardPage() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return WatchAdRewardPage();
+    }));
+  }
+
+  void _openFansRewardPage() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return FansRewardPage();
+    }));
   }
 }
